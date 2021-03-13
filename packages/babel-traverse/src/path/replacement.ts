@@ -145,27 +145,27 @@ export function replaceWith(this: NodePath, replacement: t.Node | NodePath) {
 
   let nodePath = "";
 
-  if (this.isNodeType("Statement") && t.isExpression(replacement)) {
-    if (
-      !this.canHaveVariableDeclarationOrExpression() &&
-      !this.canSwapBetweenExpressionAndStatement(replacement) &&
-      !this.parentPath.isExportDefaultDeclaration()
-    ) {
-      // replacing a statement with an expression so wrap it in an expression statement
-      replacement = t.expressionStatement(replacement);
-      nodePath = "expression";
-    }
-  }
+  // if (this.isNodeType("Statement") && t.isExpression(replacement)) {
+  //   if (
+  //     !this.canHaveVariableDeclarationOrExpression() &&
+  //     !this.canSwapBetweenExpressionAndStatement(replacement) &&
+  //     !this.parentPath.isExportDefaultDeclaration()
+  //   ) {
+  //     // replacing a statement with an expression so wrap it in an expression statement
+  //     replacement = t.expressionStatement(replacement);
+  //     nodePath = "expression";
+  //   }
+  // }
 
-  if (this.isNodeType("Expression") && t.isStatement(replacement)) {
-    if (
-      !this.canHaveVariableDeclarationOrExpression() &&
-      !this.canSwapBetweenExpressionAndStatement(replacement)
-    ) {
-      // replacing an expression with a statement so let's explode it
-      return this.replaceExpressionWithStatements([replacement]);
-    }
-  }
+  // if (this.isNodeType("Expression") && t.isStatement(replacement)) {
+  //   if (
+  //     !this.canHaveVariableDeclarationOrExpression() &&
+  //     !this.canSwapBetweenExpressionAndStatement(replacement)
+  //   ) {
+  //     // replacing an expression with a statement so let's explode it
+  //     return this.replaceExpressionWithStatements([replacement]);
+  //   }
+  // }
 
   const oldNode = this.node;
   if (oldNode) {
